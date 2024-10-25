@@ -239,7 +239,8 @@ FACTURA_DET_TIPO NVARCHAR(50)
 )
 --CREADA
 CREATE TABLE  REINUS.Factura (
-FACTURA_NUMERO DECIMAL(18,0) IDENTITY(1,1)NOT NULL,
+FACTURA_ID DECIMAL(18,0) IDENTITY(1,1)NOT NULL,
+FACTURA_NUMERO DECIMAL(18,0),
 USUARIO_ID INTEGER ,
 FECHA DATE,
 TOTAL DECIMAL(18,2)
@@ -372,14 +373,14 @@ ALTER TABLE REINUS.Almacen
 ADD CONSTRAINT PK_Almacen PRIMARY KEY (ID_ALMACEN);--HECHA
 
 ALTER TABLE REINUS.Detalle_Factura
-ADD CONSTRAINT PK_Detalle_Factura PRIMARY KEY (FACTURA_ID);--HECHA
+ADD CONSTRAINT PK_Detalle_Factura PRIMARY KEY (FACTURA_ID, CONCEPTO_ID);--HECHA
 
 
 ALTER TABLE REINUS.Publicacion --HECHA
 ADD CONSTRAINT PK_Publicacion PRIMARY KEY (ID_PUBLICACION);
 
 ALTER TABLE REINUS.Factura
-ADD CONSTRAINT PK_Factura PRIMARY KEY (FACTURA_NUMERO);--HECHA
+ADD CONSTRAINT PK_Factura PRIMARY KEY (FACTURA_ID);--HECHA
 
 
 ALTER TABLE REINUS.Subrubro
@@ -550,8 +551,16 @@ ADD CONSTRAINT FK_Detalle_Venta_Venta
 FOREIGN KEY (VENTA_ID) 
 REFERENCES REINUS.Venta(ID_VENTA);
 
+------ ES DE LA UCHOS A MUCHOS DE CONCEPTO Y FACTURA 
+ALTER TABLE REINUS.Detalle_Factura
+ADD CONSTRAINT FK_Detalle_Factura_Factura
+FOREIGN KEY(FACTURA_ID)
+REFERENCES REINUS.Factura(ID_FACTURA);
 
-
+ALTER TABLE REINUS.Detalle_Factura
+ADD CONSTRAINT FK_Detalle_Factura_Concepto
+FOREIGN KEY (CONCEPTO_ID)
+REFERENCES REINUS.Concepto(ID_CONCEPTO);
 
 
 ---------------------------------------MIGRACIONES--------------------------------------------
@@ -1032,7 +1041,7 @@ DROP PROCEDURE REINUS.migrarTipoEnvio;
 GO
 
 
--- Migración de Programacion_Envio
+-- Migracon de envio
 CREATE PROCEDURE REINUS.migrarEnvio
 AS
 BEGIN
@@ -1093,10 +1102,7 @@ BEGIN
         GD2C2024.gd_esquema.Maestra M
     LEFT JOIN 
         REINUS.Usuario U ON M.VEN_USUARIO_NOMBRE = U.NOMBRE
-    WHERE 
-        M.FACTURA_NUMERO IS NOT NULL  -- Asegúrate de que este campo es único o relevante para la identificación
 END 
-
 GO
 BEGIN TRANSACTION; 
 EXECUTE REINUS.migrarFactura; 
@@ -1140,5 +1146,60 @@ COMMIT TRANSACTION;
 GO
 
 DROP PROCEDURE REINUS.migrarDetalleFactura;
+GO
+---------------------------------MIGRACION DE PUBLICACION -----------------------
+
+CREATE PROCEDURE REINUS.migrarPublicacion
+AS 
+BEGIN
+    INSERT INTO REINUS.Publicacion (
+        CODIGO,
+        FECHA,
+        FECHA_V,
+        DESCRIPCION,
+        PRODUCTO_ID,
+        STOCK,
+        PRECIO,
+        VENDEDOR_ID,
+        COSTO,
+        ALMACEN,
+        PORC_VENTA,
+        DETALLE_FACTURA_ID
+    )
+    SELECT 
+        M.PUBLICACION_CODIGO,
+        M.PUBLICACION_FECHA,
+        M.PUBLICACION_FECHA_V,
+        M.PUBLICACION_DESCRIPCION,
+        P.ID_PRODUCTO AS PRODUCTO_ID,
+        M.PUBLICACION_STOCK,
+        M.PUBLICACION_PRECIO,
+        -- Sucede que jsuto si matcheamos con el vendedor puede haber duplciados entonces este agarra el primero
+        (SELECT TOP 1 ID_VENDEDOR FROM REINUS.Vendedor V WHERE V.CUIT = M.VENDEDOR_CUIT) AS VENDEDOR_ID,
+        M.PUBLICACION_COSTO,
+        A.ID_ALMACEN AS ALMACEN,
+        M.PUBLICACION_PORC_VENTA,
+          -- Subconsulta para obtener FACTURA_ID en base a FACTURA_NUMERO en Maestra
+		  -- Necesutamos juntarlo con algo, y y por eso tenemos el detalle factura y la factura
+		  --- y el detalle tiene factura_id, para asi joinearlo con la tabla factura y conseguir factura_nunero
+		  -- Factura numero es la relacion que hay la tabla maestra y en la nuestra
+        (SELECT D.FACTURA_ID 
+         FROM REINUS.Detalle_Factura D
+         JOIN REINUS.Factura F ON F.FACTURA_ID = D.FACTURA_ID
+         WHERE F.FACTURA_NUMERO = M.FACTURA_NUMERO) AS DETALLE_FACTURA_ID
+    FROM 
+        gd_esquema.Maestra M
+        LEFT JOIN REINUS.Producto P ON P.CODIGO = M.PRODUCTO_CODIGO --este creo que esta bien
+        LEFT JOIN REINUS.Almacen A ON A.CODIGO = M.ALMACEN_CODIGO
+        
+END;
+GO
+
+BEGIN TRANSACTION; 
+EXECUTE REINUS.migrarPublicacion; 
+COMMIT TRANSACTION;
+GO
+
+DROP PROCEDURE REINUS.migrarPublicacion;
 GO
 
