@@ -1069,27 +1069,42 @@ GO
 
 
 ---------------------------------------MIGRAR VENTA-----------------------------------------
-/*
+--CRDAD
 CREATE PROCEDURE REINUS.migrarVenta
 AS
 BEGIN
-INSERT INTO REINUS.Venta
+INSERT INTO REINUS.Venta(
+CODIGO ,
+FECHA_HORA ,
+TOTAL ,
+CLIENTE_ID ,
+ENVIO_ID 
+)
 SELECT M.VENTA_CODIGO,
 M.VENTA_DET_CANT,
 M.VENTA_DET_PRECIO,
 M.VENTA_DET_SUB_TOTAL,
 M.VENTA_FECHA,
-M.VENTA_TOTAL
+M.VENTA_TOTAL,
+ --Un poco lo mismo que pasa con publicacion, puede ser duplicado
+        (SELECT TOP 1 ID_CLIENTE FROM REINUS.Cliente C WHERE C.DNI = M.CLIENTE_DNI) AS CLIENTE_ID,
+E.ENVIO_ID
 FROM gd_esquema.Maestra M
-JOIN REINUS.Cliente C ON 
-JOIN REINUS.Envio E ON 
-WHERE M.ENVIO_COSTO IS NULL
-  END 
+JOIN REINUS.Envio E ON M.ENVIO_COSTO =E.COSTO --lo joineo con el costo peor no siento que este my bien
+WHERE  M.ENVIO_COSTO IS NOT NULL; 
+ END 
+
+
+  BEGIN TRANSACTION; 
+EXECUTE REINUS.migrarVenta; 
+COMMIT TRANSACTION;
+GO
   
 DROP PROCEDURE REINUS.migrarVenta;
 GO
 
-*/
+
+-------------------------------------------MIGRAR FACTURA -----------------
 CREATE PROCEDURE REINUS.migrarFactura 
 AS
 BEGIN
