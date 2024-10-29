@@ -1,29 +1,7 @@
 USE GD2C2024
 GO;
 
----------Eliminacion de tablas -----------------------------------------
-
-IF OBJECT_ID('REINUS.Cliente','U') IS NOT NULL
-    DROP TABLE REINUS.Cliente;
-
-IF OBJECT_ID('REINUS.Usuario','U') IS NOT NULL
-    DROP TABLE REINUS.Usuario;
-
-IF OBJECT_ID('REINUS.Vendedor','U') IS NOT NULL
-    DROP TABLE REINUS.Vendedor;
-
-IF OBJECT_ID('REINUS.Domicilio','U') IS NOT NULL
-    DROP TABLE REINUS.Domicilio;
-
-IF OBJECT_ID('REINUS.Almacen','U') IS NOT NULL
-    DROP TABLE REINUS.Almacen;
-
-IF OBJECT_ID('REINUS.Publicacion','U') IS NOT NULL
-    DROP TABLE REINUS.Publicacion;
-
-IF OBJECT_ID('REINUS.Factura','U') IS NOT NULL
-    DROP TABLE REINUS.Factura;
-
+---------------------------------------- Eliminacion de tablas ----------------------------------------
 IF OBJECT_ID('REINUS.Detalle_Factura','U') IS NOT NULL
     DROP TABLE REINUS.Detalle_Factura;
 
@@ -32,27 +10,6 @@ IF OBJECT_ID('REINUS.Concepto','U') IS NOT NULL
 
 IF OBJECT_ID('REINUS.Factura','U') IS NOT NULL
     DROP TABLE REINUS.Factura;
-
-IF OBJECT_ID('REINUS.Modelo','U') IS NOT NULL
-    DROP TABLE REINUS.Modelo;
-
-IF OBJECT_ID('REINUS.Venta','U') IS NOT NULL
-    DROP TABLE REINUS.Venta;
-
-IF OBJECT_ID('REINUS.Detalle_Venta','U') IS NOT NULL
-    DROP TABLE REINUS.Detalle_Venta;
-
-IF OBJECT_ID('REINUS.Envio','U') IS NOT NULL
-    DROP TABLE REINUS.Envio;
-
-IF OBJECT_ID('REINUS.Producto','U') IS NOT NULL
-    DROP TABLE REINUS.Producto;
-
-IF OBJECT_ID('REINUS.Rubro','U') IS NOT NULL
-    DROP TABLE REINUS.Rubro;
-
-IF OBJECT_ID('REINUS.Subrubro','U') IS NOT NULL
-    DROP TABLE REINUS.Subrubro;
 
 IF OBJECT_ID('REINUS.Pago','U') IS NOT NULL
     DROP TABLE REINUS.Pago;
@@ -63,82 +20,84 @@ IF OBJECT_ID('REINUS.MedioPago','U') IS NOT NULL
 IF OBJECT_ID('REINUS.Detalle_Pago','U') IS NOT NULL
     DROP TABLE REINUS.Detalle_Pago;
 
+IF OBJECT_ID('REINUS.Detalle_Venta','U') IS NOT NULL
+    DROP TABLE REINUS.Detalle_Venta;
+
+IF OBJECT_ID('REINUS.Venta','U') IS NOT NULL
+    DROP TABLE REINUS.Venta;
+
+IF OBJECT_ID('REINUS.Envio','U') IS NOT NULL
+    DROP TABLE REINUS.Envio;
+
 IF OBJECT_ID('REINUS.Tipo_Envio','U') IS NOT NULL
     DROP TABLE REINUS.Tipo_Envio;
 
-IF OBJECT_ID('REINUS.Direccion','U') IS NOT NULL
-    DROP TABLE REINUS.Direccion;
+IF OBJECT_ID('REINUS.Publicacion','U') IS NOT NULL
+    DROP TABLE REINUS.Publicacion;
 
-IF OBJECT_ID('REINUS.Provincia','U') IS NOT NULL
-    DROP TABLE REINUS.Provincia;
+IF OBJECT_ID('REINUS.Producto','U') IS NOT NULL
+    DROP TABLE REINUS.Producto;
+
+IF OBJECT_ID('REINUS.Modelo','U') IS NOT NULL
+    DROP TABLE REINUS.Modelo;
+
+IF OBJECT_ID('REINUS.Marca','U') IS NOT NULL
+    DROP TABLE REINUS.Marca;
+
+IF OBJECT_ID('REINUS.Subrubro','U') IS NOT NULL
+    DROP TABLE REINUS.Subrubro;
+
+IF OBJECT_ID('REINUS.Rubro','U') IS NOT NULL
+    DROP TABLE REINUS.Rubro;
+
+IF OBJECT_ID('REINUS.Almacen','U') IS NOT NULL
+    DROP TABLE REINUS.Almacen;
+
+IF OBJECT_ID('REINUS.Domicilio','U') IS NOT NULL
+    DROP TABLE REINUS.Domicilio;
+
+IF OBJECT_ID('REINUS.Vendedor','U') IS NOT NULL
+    DROP TABLE REINUS.Vendedor;
+
+IF OBJECT_ID('REINUS.Cliente','U') IS NOT NULL
+    DROP TABLE REINUS.Cliente;
+
+IF OBJECT_ID('REINUS.Usuario','U') IS NOT NULL
+    DROP TABLE REINUS.Usuario;
 
 IF OBJECT_ID('REINUS.Localidad','U') IS NOT NULL
     DROP TABLE REINUS.Localidad;
 
-ALTER TABLE REINUS.Provincia
-DROP CONSTRAINT FK_Localidad_Provincia;
+IF OBJECT_ID('REINUS.Provincia','U') IS NOT NULL
+    DROP TABLE REINUS.Provincia;
 
--------------------------DBO NORMLAES---
-	IF OBJECT_ID('dbo.MedioPago','U') IS NOT NULL
-    DROP TABLE dbo.MedioPago;
-	IF OBJECT_ID('dbo.Pago','U') IS NOT NULL
-    DROP TABLE dbo.Pago;
-	IF OBJECT_ID('dbo.Marca','U') IS NOT NULL
-    DROP TABLE dbo.Marca;
-	IF OBJECT_ID('dbo.Modelo','U') IS NOT NULL
-    DROP TABLE dbo.Modelo;
-	IF OBJECT_ID('dbo.Usuario','U') IS NOT NULL
-    DROP TABLE dbo.Usuario;
-	IF OBJECT_ID('dbo.Vendedor','U') IS NOT NULL
-    DROP TABLE dbo.Vendedor;
-	IF OBJECT_ID('dbo.Producto','U') IS NOT NULL
-    DROP TABLE dbo.Producto;
-	IF OBJECT_ID('dbo.Localidad','U') IS NOT NULL
-    DROP TABLE dbo.Localidad;
-	IF OBJECT_ID('dbo.Tipo_Envio','U') IS NOT NULL
-    DROP TABLE dbo.Tipo_Envio;
-	IF OBJECT_ID('dbo.Direccion','U') IS NOT NULL
-    DROP TABLE dbo.Direccion;
-	IF OBJECT_ID('dbo.Publicacion','U') IS NOT NULL
-    DROP TABLE dbo.Publicacion;
-	IF OBJECT_ID('dbo.Provincia','U') IS NOT NULL
-    DROP TABLE dbo.Provincia;
-		IF OBJECT_ID('dbo.Envio','U') IS NOT NULL
-    DROP TABLE dbo.Envio;
-	IF OBJECT_ID('dbo.Detalle_Venta','U') IS NOT NULL
-    DROP TABLE dbo.Detalle_Venta;
-	IF OBJECT_ID('dbo.Subrubro','U') IS NOT NULL
-    DROP TABLE dbo.Subrubro;
-	IF OBJECT_ID('dbo.Domicilio','U') IS NOT NULL
-    DROP TABLE dbo.Domicilio;
-		IF OBJECT_ID('dbo.Marca','U') IS NOT NULL
-    DROP TABLE dbo.Marca;
-
-
-	IF OBJECT_ID('dbo.Concepto','U') IS NOT NULL
-    DROP TABLE dbo.Concepto;
-	IF OBJECT_ID('dbo.Factura','U') IS NOT NULL
-    DROP TABLE dbo.Factura;
-
-
-	IF OBJECT_ID('dbo.Detalle_Factura','U') IS NOT NULL
-    DROP TABLE dbo.Detalle_Factura;
-	IF OBJECT_ID('dbo.Detalle_Pago','U') IS NOT NULL
-    DROP TABLE dbo.Detalle_Pago;
-	IF OBJECT_ID('dbo.Marca','U') IS NOT NULL
-    DROP TABLE dbo.Marca;
-
-
--------------------- Eliminación del esquema ---------------------------
-
-DROP SCHEMA IF EXISTS REINUS
+---------------------------------------- Eliminación del esquema ----------------------------------------
+IF EXISTS (SELECT*FROM sys.schemas
+WHERE name = 'REINUS')
+BEGIN
+EXEC('DROP SCHEMA REINUS')
+PRINT 'Esquema borrado exitosamente'
+END
+ELSE
+BEGIN
+PRINT 'El esquema no existe'
+end
 GO
 
--------------------- Creación del esquema ---------------------------
-CREATE SCHEMA REINUS
+---------------------------------------- Creación del esquema ----------------------------------------
+IF NOT EXISTS (SELECT*FROM sys.schemas
+WHERE name = 'REINUS')
+BEGIN
+EXEC('CREATE SCHEMA REINUS')
+PRINT 'Esquema creado exitosamente'
+END
+ELSE
+BEGIN
+PRINT 'El esquema ya esta creado'
+end
 GO
-----------------------------------CREACION DE TABLAS-------------------------
 
+---------------------------------------- Creacion de las tablas ----------------------------------------
 CREATE TABLE REINUS.Usuario (
 ID_USUARIO INTEGER IDENTITY(1,1)  NOT NULL,
 NOMBRE NVARCHAR(50), 
@@ -147,8 +106,6 @@ MAIL NVARCHAR(50),
 FECHA_CREACION DATE
 )
 
-------------sin direccion-----------------------
-/*
 CREATE TABLE REINUS.Domicilio (
 ID_DOMICILIO  INTEGER  IDENTITY(1,1) NOT NULL,
 PISO DECIMAL(18,0),
@@ -158,23 +115,6 @@ CALLE NVARCHAR(50),
 NUM_CALLE INTEGER,
 USUARIO_ID INTEGER,--FK
 LOCALIDAD_ID INTEGER --FK
-)*/
-
-------------con direccion-----------------------
-CREATE TABLE REINUS.Domicilio (
-ID_DOMICILIO  INTEGER  IDENTITY(1,1) NOT NULL,
-PISO DECIMAL(18,0),
-DEPTO NVARCHAR(50),
-CP NVARCHAR(50),
-USUARIO_ID INTEGER,--FK
-DIRECCION_ID INTEGER--FK
-)
-
-CREATE TABLE REINUS.Direccion (
-ID_DIRECCION  INTEGER IDENTITY(1,1) NOT NULL ,
-CALLE NVARCHAR(50),
-NUM_CALLE INTEGER,
-LOCALIDAD_ID INTEGER--FK
 )
 
 CREATE TABLE REINUS.Provincia(
@@ -203,12 +143,11 @@ FECHA_NAC DATE,
 DNI DECIMAL(18,0),
 ID_USUARIO INTEGER --FK
 )
-----------------------------------------------------
 
 CREATE TABLE  REINUS.Almacen (
 ID_ALMACEN INTEGER IDENTITY(1,1) NOT NULL,
 CODIGO DECIMAL(18,0), 
-ID_DIRECCION INTEGER --FK
+DOMICILIO_ID INTEGER --FK
 )
 
 CREATE TABLE REINUS.Publicacion (
@@ -222,7 +161,7 @@ STOCK DECIMAL(18,0),
 PRECIO INTEGER DEFAULT 0,
 VENDEDOR_ID INTEGER NOT NULL ,--FK
 COSTO INTEGER ,
-ALMACEN DECIMAL(18,2),
+ALMACEN_ID INTEGER NOT NULL,
 PORC_VENTA DECIMAL(18,2)
 )
  
@@ -252,8 +191,9 @@ TOTAL DECIMAL(18,2)
 CREATE TABLE REINUS.Producto (
 ID_PRODUCTO INTEGER IDENTITY(1,1) NOT NULL,
 CODIGO NVARCHAR(50),
-ID_MODELO INTEGER NOT NULL,--FK
 PRECIO DECIMAL(18,2),
+DESCRIPCION NVARCHAR(50),
+ID_MODELO INTEGER NOT NULL,--FK
 SUBRUBRO_ID INTEGER NOT NULL ,--FK
 ID_MARCA INTEGER NOT NULL --FK
 )
@@ -302,8 +242,6 @@ FECHA_VENC_TARJETA DATE,
 CANT_CUOTAS DECIMAL(18,0)
 )
 
-
---CRDADA
 CREATE TABLE REINUS.Venta (
 ID_VENTA INTEGER IDENTITY (1,1) NOT NULL,
 CODIGO DECIMAL(18,0),
@@ -313,7 +251,6 @@ CLIENTE_ID INTEGER NOT NULL,--FK
 ENVIO_ID INTEGER NOT NULL--FK
 )
 
---CREADA
 CREATE TABLE REINUS.Detalle_Venta (
 VENTA_DET_ID INTEGER IDENTITY(1,1) NOT NULL,
 CANT DECIMAL (18,0),
@@ -323,11 +260,11 @@ PUBLICACION_ID INTEGER NOT NULL,
 VENTA_ID INTEGER NOT NULL
 )
 
-CREATE TABLE REINUS.Envio --CREADA
+CREATE TABLE REINUS.Envio
 (
 ENVIO_ID INTEGER IDENTITY(1,1) NOT NULL,
-FECHA_PROGRAMADA DATE ,
-DOMICILIO_ID INTEGER NOT NULL ,--FK
+FECHA_PROGRAMADA DATE,
+DOMICILIO_ID INTEGER NOT NULL,--FK
 HORA_INICIO DECIMAL(18,0),
 HORA_FIN_INICIO DECIMAL(18,0),
 COSTO DECIMAL(18,2),
@@ -337,12 +274,12 @@ ENTREGA BIT
 )
 
 CREATE TABLE REINUS.Tipo_Envio
-( --CREADA(
+(
 TIPO_ENVIO_ID INTEGER IDENTITY(1,1) NOT NULL,
 TIPO NVARCHAR(50)
 )
 
-------------------- Creación de primary keys ---------------------------
+---------------------------------------- Creación de primary keys ----------------------------------------
 ALTER TABLE REINUS.Detalle_Venta  -- HECHA
 ADD CONSTRAINT PK_Detalle_Venta PRIMARY KEY (VENTA_DET_ID);
 
@@ -360,9 +297,6 @@ ADD CONSTRAINT PK_Vendedor PRIMARY KEY (ID_VENDEDOR);--HECHA
 
 ALTER TABLE REINUS.Domicilio
 ADD CONSTRAINT PK_Domicilio PRIMARY KEY (ID_DOMICILIO);--HECHA
-
-ALTER TABLE REINUS.Direccion
-ADD CONSTRAINT PK_Direccion PRIMARY KEY (ID_DIRECCION);--HECHA
 
 ALTER TABLE REINUS.Almacen
 ADD CONSTRAINT PK_Almacen PRIMARY KEY (ID_ALMACEN);--HECHA
@@ -391,8 +325,6 @@ ADD CONSTRAINT PK_Envio PRIMARY KEY (ENVIO_ID);--HECHA
 ALTER TABLE REINUS.Concepto
 ADD CONSTRAINT PK_Concepto PRIMARY KEY (CONCEPTO_ID);--HECHA  
 
-ALTER TABLE REINUS.Tipo_Envio
-ADD CONSTRAINT PK_Tipo_Envio PRIMARY KEY (TIPO_ENVIO_ID);--HECHA  
 
 ALTER TABLE REINUS.Marca
 ADD CONSTRAINT PK_Marca PRIMARY KEY (ID_MARCA);--HECHA  
@@ -409,20 +341,16 @@ ADD CONSTRAINT PK_MedioPago PRIMARY KEY (ID_MEDIO_PAGO);--HECHA
 ALTER TABLE REINUS.Pago
 ADD CONSTRAINT PK_Pago PRIMARY KEY (PAGO_ID);--HECHA
 
---ID_DETALLE_PAGO
 ALTER TABLE REINUS.Detalle_Pago
 ADD CONSTRAINT PK_Detalle_Pago PRIMARY KEY (ID_DETALLE_PAGO);--HECHA 
 
---ID_DETALLE_PAGO
 ALTER TABLE REINUS.Localidad
 ADD CONSTRAINT PK_Localidad PRIMARY KEY (ID_LOCALIDAD);--HECHA 
 
---ID_DETALLE_PAGO
 ALTER TABLE REINUS.Provincia
 ADD CONSTRAINT PK_Provincia PRIMARY KEY (ID_PROVINCIA);--HECHA 
 
---------------------------------------------------------------------------
--------------------- Creación de foreign keys ---------------------------
+---------------------------------------- Creación de foreign keys ----------------------------------------
 ALTER TABLE REINUS.Cliente
 ADD CONSTRAINT FK_Usuario_Cliente
 FOREIGN KEY (ID_USUARIO) 
@@ -433,7 +361,6 @@ ADD CONSTRAINT FK_Vendedor_Cliente
 FOREIGN KEY (ID_USUARIO) 
 REFERENCES REINUS.Usuario(ID_USUARIO);
 
---LISTO
 ALTER TABLE REINUS.Domicilio
 ADD CONSTRAINT FK_Usuario_Domicilio
 FOREIGN KEY (USUARIO_ID) 
@@ -444,17 +371,6 @@ ADD CONSTRAINT FK_Domicilio_Localidad
 FOREIGN KEY (LOCALIDAD_ID) 
 REFERENCES REINUS.Localidad(ID_LOCALIDAD);
 
---Si uso domicilio con direccion---------------
-ALTER TABLE REINUS.Domicilio
-ADD CONSTRAINT FK_Direccion_Domicilio
-FOREIGN KEY (DIRECCION_ID) 
-REFERENCES REINUS.Direccion(ID_DIRECCION);
-
-ALTER TABLE REINUS.Direccion
-ADD CONSTRAINT FK_Direccion_Localidad
-FOREIGN KEY (LOCALIDAD_ID) 
-REFERENCES REINUS.Localidad(ID_LOCALIDAD);
--------------------------------------------------
 ALTER TABLE REINUS.Localidad
 ADD CONSTRAINT FK_Localidad_Provincia
 FOREIGN KEY (ID_PROVINCIA) 
@@ -462,22 +378,19 @@ REFERENCES REINUS.Provincia(ID_PROVINCIA);
 
 ALTER TABLE REINUS.Almacen
 ADD CONSTRAINT FK_Almacen_Direccion
-FOREIGN KEY (ID_DIDRECCION) 
-REFERENCES REINUS.Direccion(ID_DIRECCION);
+FOREIGN KEY (DOMICILIO_ID) 
+REFERENCES REINUS.Domicilio(ID_DOMICILIO);
 
---listo
 ALTER TABLE REINUS.Publicacion
 ADD CONSTRAINT FK_Publicacion_Producto
 FOREIGN KEY (PRODUCTO_ID) 
 REFERENCES REINUS.Producto(ID_PRODUCTO);
 
---listo
 ALTER TABLE REINUS.Publicacion
 ADD CONSTRAINT FK_Publicacion_Vendedor
 FOREIGN KEY (VENDEDOR_ID) 
 REFERENCES REINUS.Vendedor(ID_VENDEDOR);
 
---listo
 ALTER TABLE REINUS.Publicacion
 ADD CONSTRAINT FK_Publicacion_Almacen
 FOREIGN KEY (ALMACEN_ID) 
@@ -529,40 +442,46 @@ ADD CONSTRAINT FK_Venta_Envio
 FOREIGN KEY (ENVIO_ID) 
 REFERENCES REINUS.Envio(ENVIO_ID);
 
--- HECHAS ESTAS
 ALTER TABLE REINUS.Envio
 ADD CONSTRAINT FK_Envio_Domicilio
 FOREIGN KEY (DOMICILIO_ID) 
 REFERENCES REINUS.Domicilio(ID_DOMICILIO);
 
+ALTER TABLE REINUS.Envio
+ADD CONSTRAINT FK_Envio_TipoEnvio
+FOREIGN KEY (TIPO_ENVIO_ID) 
+REFERENCES REINUS.Tipo_Envio(TIPO_ENVIO_ID);
 
 ALTER TABLE REINUS.Detalle_Venta
 ADD CONSTRAINT FK_Detalle_Venta_Venta
 FOREIGN KEY (VENTA_ID) 
 REFERENCES REINUS.Venta(ID_VENTA);
 
+ALTER TABLE REINUS.Detalle_Venta
+ADD CONSTRAINT FK_Detalle_Venta_Publicacion
+FOREIGN KEY (PUBLICACION_ID) 
+REFERENCES REINUS.Publicacion(ID_PUBLICACION);
+
 ALTER TABLE REINUS.Factura
 ADD CONSTRAINT FK_Factura_Usuario
 FOREIGN KEY(USUARIO_ID)
 REFERENCES REINUS.Usuario(ID_USUARIO);
 
------- ES DE LA UCHOS A MUCHOS DE CONCEPTO Y FACTURA 
+------FUNCIONARIAN COMO PK PARA DETALLE FACTURA
 ALTER TABLE REINUS.Detalle_Factura
 ADD CONSTRAINT FK_Detalle_Factura_Factura
 FOREIGN KEY(FACTURA_ID)
-REFERENCES REINUS.Factura(ID_FACTURA);
+REFERENCES REINUS.Factura(FACTURA_ID);
 
 ALTER TABLE REINUS.Detalle_Factura
 ADD CONSTRAINT FK_Detalle_Factura_Concepto
 FOREIGN KEY (CONCEPTO_ID)
-REFERENCES REINUS.Concepto(ID_CONCEPTO);
+REFERENCES REINUS.Concepto(CONCEPTO_ID);
 
 
----------------------------------------MIGRACIONES--------------------------------------------
--- Vamos por las mas sencillas provicia, localidad
+---------------------------------------- Procedures para la migracion ----------------------------------------
 
--- Migración de Provincia
-  --------------------------MIGRACION PROVINCIA----------------
+---------------------------------------- MIGRACION PROVINCIA ----------------------------------------
 GO
 
 CREATE PROCEDURE REINUS.migrar_provincia AS 
@@ -586,13 +505,7 @@ WHERE ALMACEN_PROVINCIA IS NOT NULL;
 END
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_provincia; 
-COMMIT TRANSACTION;
-GO
-
-
-/** ---------------------MIGRACION DE LOCALIDAD----------------*/
+---------------------------------------- MIGRACION DE LOCALIDAD ----------------------------------------
 CREATE PROCEDURE REINUS.migrar_Localidad AS 
 BEGIN 
 INSERT INTO REINUS.Localidad(NOMBRE,ID_PROVINCIA)
@@ -616,51 +529,11 @@ WHERE ALMACEN_PROVINCIA  IS NOT NULL
 END;
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_Localidad; 
-COMMIT TRANSACTION;
-GO
-
---------------------------MIGRACION DIRECCION-----------------
-CREATE PROCEDURE REINUS.migrar_direccion AS
-BEGIN
-    -- Inserta en la tabla Direccion
-    INSERT INTO REINUS.Direccion (CALLE, NUM_CALLE, LOCALIDAD_ID)
-    SELECT DISTINCT M.VEN_USUARIO_DOMICILIO_CALLE, M.VEN_USUARIO_DOMICILIO_NRO_CALLE, L.ID_LOCALIDAD
-    FROM GD2C2024.gd_esquema.Maestra M
-    JOIN REINUS.Localidad L ON M.VEN_USUARIO_DOMICILIO_LOCALIDAD = L.NOMBRE --joineo con eso
-    WHERE M.VEN_USUARIO_DOMICILIO_CALLE IS NOT NULL 
-      AND M.VEN_USUARIO_DOMICILIO_NRO_CALLE IS NOT NULL
-
-    UNION
-
-    SELECT DISTINCT M.CLI_USUARIO_DOMICILIO_CALLE, M.CLI_USUARIO_DOMICILIO_NRO_CALLE, L.ID_LOCALIDAD
-    FROM GD2C2024.gd_esquema.Maestra M
-    JOIN REINUS.Localidad L ON M.CLI_USUARIO_DOMICILIO_LOCALIDAD = L.NOMBRE
-    WHERE M.CLI_USUARIO_DOMICILIO_CALLE IS NOT NULL 
-      AND M.CLI_USUARIO_DOMICILIO_NRO_CALLE IS NOT NULL
-
-    UNION
-
-    SELECT DISTINCT M.ALMACEN_CALLE, M.ALMACEN_NRO_CALLE, L.ID_LOCALIDAD
-    FROM GD2C2024.gd_esquema.Maestra M
-    JOIN REINUS.Localidad L ON M.ALMACEN_Localidad = L.NOMBRE
-    WHERE M.ALMACEN_CALLE IS NOT NULL 
-      AND M.ALMACEN_NRO_CALLE IS NOT NULL;
-END;
-GO
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_direccion; 
-COMMIT TRANSACTION;
-GO
-
- --------------------------MIGRACION DOMICILIO (sin direccion)-----------------
- ------------------------------------OPCION JUAN---------------------------------------
- CREATE PROCEDURE REINUS.Migrar_Domicilio
+ ---------------------------------------- MIGRACION DOMICILIO ----------------------------------------
+CREATE PROCEDURE REINUS.Migrar_Domicilio
 AS
 BEGIN
-INSERT INTO REINUS.Domicilio (calle, numero_calle, piso, depto, codigo_postal, localidad_id, usuario_id)
+INSERT INTO REINUS.Domicilio (CALLE, NUM_CALLE, PISO, DEPTO, CP,LOCALIDAD_ID, USUARIO_ID)
 SELECT DISTINCT
     domicilio.calle,
 	domicilio.numero_calle,
@@ -670,7 +543,7 @@ SELECT DISTINCT
 	localidad.ID_LOCALIDAD,
 	usuario.ID_USUARIO
 FROM (
-	SELECT 
+	SELECT DISTINCT
 		m.CLI_USUARIO_DOMICILIO_CALLE as calle,
 		m.CLI_USUARIO_DOMICILIO_NRO_CALLE as numero_calle,
 		m.CLI_USUARIO_DOMICILIO_PISO as piso,
@@ -680,11 +553,14 @@ FROM (
 		m.CLI_USUARIO_DOMICILIO_PROVINCIA as provincia,
 		m.CLI_USUARIO_NOMBRE as username,
 		m.CLI_USUARIO_PASS as pass,
-		m.CLI_USUARIO_FECHA_CREACION as fecha_creacion
+		m.CLI_USUARIO_FECHA_CREACION as fecha_creacion,
+		m.CLIENTE_MAIL as mail
 	FROM gd_esquema.Maestra m
 	WHERE m.CLI_USUARIO_DOMICILIO_CALLE IS NOT NULL 
+	
 	UNION
-	SELECT 
+	
+	SELECT DISTINCT
 		m.VEN_USUARIO_DOMICILIO_CALLE as calle,
 		m.VEN_USUARIO_DOMICILIO_NRO_CALLE as numero_calle,
 		m.VEN_USUARIO_DOMICILIO_PISO as piso,
@@ -694,172 +570,35 @@ FROM (
 		m.VEN_USUARIO_DOMICILIO_PROVINCIA as provincia,
 		m.VEN_USUARIO_NOMBRE as username,
 		m.VEN_USUARIO_PASS as pass,
-		m.VEN_USUARIO_FECHA_CREACION as fecha_creacion
+		m.VEN_USUARIO_FECHA_CREACION as fecha_creacion,
+		m.VENDEDOR_MAIL as mail
 	FROM gd_esquema.Maestra m
-	WHERE m.VEN_USUARIO_DOMICILIO_CALLE IS NOT NULL 
+	WHERE m.VEN_USUARIO_DOMICILIO_CALLE IS NOT NULL
+	
+	UNION ALL
+	SELECT DISTINCT
+		m.ALMACEN_CALLE as calle,
+		m.ALMACEN_NRO_CALLE as numero_calle,
+		NULL as piso,
+		NULL as depto,
+		NULL as codigo_postal,
+		ALMACEN_Localidad as localidad,
+		ALMACEN_PROVINCIA as provincia,
+		NULL as username,
+		NULL as pass,
+		NULL as fecha_creacion,
+		NULL as mail
+	FROM gd_esquema.Maestra m
+	WHERE m.ALMACEN_CALLE IS NOT NULL 
 ) domicilio
 JOIN REINUS.Provincia provincia ON provincia.nombre = domicilio.provincia
 JOIN REINUS.Localidad localidad ON localidad.nombre = domicilio.localidad AND localidad.ID_PROVINCIA = provincia.ID_PROVINCIA
-JOIN REINUS.Usuario usuario ON usuario.NOMBRE = domicilio.username AND usuario.pass = domicilio.pass AND usuario.fecha_creacion = domicilio.fecha_creacion
+LEFT JOIN REINUS.Usuario usuario ON usuario.NOMBRE = domicilio.username AND usuario.pass = domicilio.pass AND usuario.fecha_creacion = domicilio.fecha_creacion and usuario.MAIL = domicilio.mail
 ORDER BY 1;
 END
 GO
--------------------------------------OPCION 1------------------------------------------
-CREATE PROCEDURE REINUS.Migrar_Domicilio
-AS
-BEGIN
-   -- INSERT INTO REINUS.Domicilio (PISO, DEPTO, CP, USUARIO_ID, DIRECCION_ID)
-    SELECT DISTINCT
-        domicilio.piso,
-        domicilio.depto,
-        domicilio.codigo_postal,
-        usuario.ID_USUARIO,  -- Asegúrate de usar el ID correcto para USUARIO_ID
-        localidad.ID_LOCALIDAD,
-		domicilio.numero_calle,
-		domicilio.calle
-    FROM (
-        SELECT 
-            m.CLI_USUARIO_DOMICILIO_PISO as piso,
-            m.CLI_USUARIO_DOMICILIO_DEPTO as depto,
-            m.CLI_USUARIO_DOMICILIO_CP as codigo_postal,
-            m.CLI_USUARIO_DOMICILIO_CALLE as calle,
-            m.CLI_USUARIO_DOMICILIO_NRO_CALLE as numero_calle,
-            m.CLI_USUARIO_DOMICILIO_LOCALIDAD as localidad,
-            m.CLI_USUARIO_DOMICILIO_PROVINCIA as provincia,
-            m.CLI_USUARIO_NOMBRE as username,
-            m.CLI_USUARIO_PASS as pass,
-            m.CLI_USUARIO_FECHA_CREACION as fecha_creacion
-        FROM gd_esquema.Maestra m
-        WHERE m.CLI_USUARIO_DOMICILIO_CALLE IS NOT NULL
-		    AND m.CLI_USUARIO_NOMBRE IS NOT NULL
-            AND m.CLI_USUARIO_PASS IS NOT NULL
-            AND m.CLI_USUARIO_FECHA_CREACION IS NOT NULL
-			AND m.VEN_USUARIO_NOMBRE IS NULL
-            AND m.VEN_USUARIO_PASS IS NULL
-            AND m.VEN_USUARIO_FECHA_CREACION IS NULL 
-           ) domicilio
-    JOIN REINUS.Provincia provincia ON provincia.NOMBRE = domicilio.provincia
-    JOIN REINUS.Localidad localidad ON localidad.NOMBRE = domicilio.localidad AND localidad.ID_PROVINCIA = provincia.ID_PROVINCIA
-    JOIN REINUS.Usuario usuario ON usuario.NOMBRE = domicilio.username AND usuario.PASS = domicilio.pass AND usuario.FECHA_CREACION = domicilio.fecha_creacion
 
-	WHERE usuario.VENDEDOR_ID is NULL AND usuario.CLIENTE_ID is not NULL
-
-UNION 
-SELECT DISTINCT
-        domicilio2.piso,
-        domicilio2.depto,
-        domicilio2.codigo_postal,
-        usuario.ID_USUARIO,  -- Asegúrate de usar el ID correcto para USUARIO_ID
-        localidad.ID_LOCALIDAD,
-		domicilio2.numero_calle,
-		domicilio2.calle
-    FROM (SELECT 
-            m.VEN_USUARIO_DOMICILIO_PISO as piso,
-            m.VEN_USUARIO_DOMICILIO_DEPTO as depto,
-            m.VEN_USUARIO_DOMICILIO_CP as codigo_postal,
-            m.VEN_USUARIO_DOMICILIO_CALLE as calle,
-            m.VEN_USUARIO_DOMICILIO_NRO_CALLE as numero_calle,
-            m.VEN_USUARIO_DOMICILIO_LOCALIDAD as localidad,
-            m.VEN_USUARIO_DOMICILIO_PROVINCIA as provincia,
-            m.VEN_USUARIO_NOMBRE as username,
-            m.VEN_USUARIO_PASS as pass,
-            m.VEN_USUARIO_FECHA_CREACION as fecha_creacion
-        FROM gd_esquema.Maestra m
-        WHERE m.VEN_USUARIO_DOMICILIO_CALLE IS NOT NULL 
-    ) domicilio2
-JOIN REINUS.Provincia provincia ON provincia.NOMBRE = domicilio2.provincia
-    JOIN REINUS.Localidad localidad ON localidad.NOMBRE = domicilio2.localidad AND localidad.ID_PROVINCIA = provincia.ID_PROVINCIA
-    JOIN REINUS.Usuario usuario ON usuario.NOMBRE = domicilio2.username AND usuario.PASS = domicilio2.pass AND usuario.FECHA_CREACION = domicilio2.fecha_creacion
-END
-GO
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.Migrar_Domicilio; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.Migrar_Domicilio
-GO
-
- --------------------------MIGRACION DOMICILIO (con direccion)-----------------
-CREATE PROCEDURE REINUS.Migrar_Domicilio2
-AS
-BEGIN
-   INSERT INTO REINUS.Domicilio (PISO, DEPTO, CP, USUARIO_ID, DIRECCION_ID)
-    SELECT DISTINCT
-        domicilio.piso,
-        domicilio.depto,
-        domicilio.codigo_postal,
-        usuario.ID_USUARIO,  -- Asegúrate de usar el ID correcto para USUARIO_ID
-        direccion.ID_DIRECCION
-		
-		-- Asegúrate de usar el ID correcto para DIRECCION_ID
-    FROM (
-        SELECT 
-            m.CLI_USUARIO_DOMICILIO_PISO as piso,
-            m.CLI_USUARIO_DOMICILIO_DEPTO as depto,
-            m.CLI_USUARIO_DOMICILIO_CP as codigo_postal,
-            m.CLI_USUARIO_DOMICILIO_CALLE as calle,
-            m.CLI_USUARIO_DOMICILIO_NRO_CALLE as numero_calle,
-            m.CLI_USUARIO_DOMICILIO_LOCALIDAD as localidad,
-            m.CLI_USUARIO_DOMICILIO_PROVINCIA as provincia,
-            m.CLI_USUARIO_NOMBRE as username,
-            m.CLI_USUARIO_PASS as pass,
-            m.CLI_USUARIO_FECHA_CREACION as fecha_creacion
-        FROM gd_esquema.Maestra m
-        WHERE m.CLI_USUARIO_DOMICILIO_CALLE IS NOT NULL
-		    AND m.CLI_USUARIO_NOMBRE IS NOT NULL
-            AND m.CLI_USUARIO_PASS IS NOT NULL
-            AND m.CLI_USUARIO_FECHA_CREACION IS NOT NULL
-			AND m.VEN_USUARIO_NOMBRE IS NULL
-            AND m.VEN_USUARIO_PASS IS NULL
-            AND m.VEN_USUARIO_FECHA_CREACION IS NULL 
-           ) domicilio
-    JOIN REINUS.Provincia provincia ON provincia.NOMBRE = domicilio.provincia
-    JOIN REINUS.Localidad localidad ON localidad.NOMBRE = domicilio.localidad AND localidad.ID_PROVINCIA = provincia.ID_PROVINCIA
-    JOIN REINUS.Direccion direccion ON direccion.CALLE = domicilio.calle AND direccion.NUM_CALLE = domicilio.numero_calle AND direccion.LOCALIDAD_ID = localidad.ID_LOCALIDAD
-    JOIN REINUS.Usuario usuario ON usuario.NOMBRE = domicilio.username AND usuario.PASS = domicilio.pass AND usuario.FECHA_CREACION = domicilio.fecha_creacion
-
-	WHERE usuario.VENDEDOR_ID is NULL AND usuario.CLIENTE_ID is not NULL
-
-UNION 
-SELECT DISTINCT
-        domicilio2.piso,
-        domicilio2.depto,
-        domicilio2.codigo_postal,
-        usuario.ID_USUARIO,  -- Asegúrate de usar el ID correcto para USUARIO_ID
-        direccion.ID_DIRECCION -- Asegúrate de usar el ID correcto para DIRECCION_ID
-    FROM (SELECT 
-            m.VEN_USUARIO_DOMICILIO_PISO as piso,
-            m.VEN_USUARIO_DOMICILIO_DEPTO as depto,
-            m.VEN_USUARIO_DOMICILIO_CP as codigo_postal,
-            m.VEN_USUARIO_DOMICILIO_CALLE as calle,
-            m.VEN_USUARIO_DOMICILIO_NRO_CALLE as numero_calle,
-            m.VEN_USUARIO_DOMICILIO_LOCALIDAD as localidad,
-            m.VEN_USUARIO_DOMICILIO_PROVINCIA as provincia,
-            m.VEN_USUARIO_NOMBRE as username,
-            m.VEN_USUARIO_PASS as pass,
-            m.VEN_USUARIO_FECHA_CREACION as fecha_creacion
-        FROM gd_esquema.Maestra m
-        WHERE m.VEN_USUARIO_DOMICILIO_CALLE IS NOT NULL 
-    ) domicilio2
-JOIN REINUS.Provincia provincia ON provincia.NOMBRE = domicilio2.provincia
-    JOIN REINUS.Localidad localidad ON localidad.NOMBRE = domicilio2.localidad AND localidad.ID_PROVINCIA = provincia.ID_PROVINCIA
-    JOIN REINUS.Direccion direccion ON direccion.CALLE = domicilio2.calle AND direccion.NUM_CALLE = domicilio2.numero_calle AND direccion.LOCALIDAD_ID = localidad.ID_LOCALIDAD
-    JOIN REINUS.Usuario usuario ON usuario.NOMBRE = domicilio2.username AND usuario.PASS = domicilio2.pass AND usuario.FECHA_CREACION = domicilio2.fecha_creacion
-END
-GO
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.Migrar_Domicilio2; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.Migrar_Domicilio2
-GO
-
-
-------------------------------MIGRAR CLIENTE------------------------------------
+---------------------------------------- MIGRAR CLIENTE ----------------------------------------
 CREATE PROCEDURE REINUS.migrarCliente
 AS 
 BEGIN
@@ -878,24 +617,17 @@ INSERT INTO REINUS.Cliente (NOMBRE, APELLIDO, FECHA_NAC, DNI, ID_USUARIO)
             m.CLIENTE_DNI as dni,
             m.CLI_USUARIO_NOMBRE as username,
             m.CLI_USUARIO_PASS as pass,
-            m.CLI_USUARIO_FECHA_CREACION as fecha_creacion
+            m.CLI_USUARIO_FECHA_CREACION as fecha_creacion,
+			m.CLIENTE_MAIL as mail
         FROM gd_esquema.Maestra m
         WHERE m.CLIENTE_NOMBRE IS NOT NULL
     ) cliente
-    JOIN REINUS.Usuario usuario ON usuario.NOMBRE = cliente.username AND usuario.pass = cliente.pass AND usuario.fecha_creacion = cliente.fecha_creacion
+    JOIN REINUS.Usuario usuario ON usuario.NOMBRE = cliente.username AND usuario.pass = cliente.pass AND usuario.fecha_creacion = cliente.fecha_creacion and usuario.MAIL = cliente.mail
 	ORDER BY usuario.ID_USUARIO
 END 
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarCliente; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrarCliente;
-GO
-
-------------------------------MIGRAR VENDEDOR----------------------------------
+---------------------------------------- MIGRAR VENDEDOR ----------------------------------------
 CREATE PROCEDURE REINUS.Migrar_Vendedor
 AS
 BEGIN
@@ -919,15 +651,7 @@ ORDER BY usuario.ID_USUARIO
 END
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.Migrar_Vendedor;
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.Migrar_Vendedor;
-GO
-
----------------------------------MIGRAR USUARIO ------------------------
+---------------------------------------- MIGRAR USUARIO ----------------------------------------
 CREATE PROCEDURE REINUS.migrar_usuarios
 AS
 BEGIN
@@ -961,38 +685,22 @@ INSERT INTO REINUS.Usuario (NOMBRE, PASS, FECHA_CREACION, MAIL)
 END;
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_usuarios;
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrar_usuarios;
-GO
-
--------------------------------MIGRACION DE ALMACEN ----------------------------------
+---------------------------------------- MIGRACION DE ALMACEN ----------------------------------------
 CREATE PROCEDURE REINUS.migrar_almacen AS
 BEGIN
---INSERT INTO REINUS.Almacen 
+INSERT INTO REINUS.Almacen(CODIGO, DOMICILIO_ID)
 SELECT DISTINCT 
     M.ALMACEN_CODIGO AS CODIGO,
-    D.ID_DIRECCION
+    D.ID_DOMICILIO
 FROM GD2C2024.gd_esquema.Maestra M
 JOIN REINUS.Provincia P ON M.ALMACEN_PROVINCIA = P.NOMBRE
 JOIN REINUS.Localidad L ON M.ALMACEN_Localidad = L.NOMBRE AND L.ID_PROVINCIA = P.ID_PROVINCIA
-JOIN REINUS.Direccion D ON M.ALMACEN_CALLE = D.CALLE AND M.ALMACEN_NRO_CALLE = D.NUM_CALLE AND D.LOCALIDAD_ID = L.ID_LOCALIDAD
-WHERE M.ALMACEN_CODIGO IS NOT NULL;
+JOIN REINUS.Domicilio D ON M.ALMACEN_CALLE = D.CALLE AND M.ALMACEN_NRO_CALLE = D.NUM_CALLE AND D.LOCALIDAD_ID = L.ID_LOCALIDAD
+WHERE M.ALMACEN_CODIGO IS NOT NULL
 END 
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_almacen;
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrar_almacen
-GO
-
------------------------MIGRACION DE CONCEPTO---------------------------
+---------------------------------------- MIGRACION DE CONCEPTO ----------------------------------------
 CREATE PROCEDURE REINUS.migrarConcepto
 AS
 BEGIN
@@ -1003,15 +711,7 @@ WHERE FACTURA_DET_TIPO IS NOT NULL
 END 
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarConcepto;
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrarConcepto;
-GO
-
------------------- ------MIGRACION DE MARCA------------------------------
+---------------------------------------- MIGRACION DE MARCA ----------------------------------------
 CREATE PROCEDURE REINUS.migrar_marca AS
 BEGIN 
 INSERT INTO REINUS.Marca
@@ -1021,15 +721,7 @@ WHERE PRODUCTO_MARCA IS NOT NULL
 END ;
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_marca;
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrar_marca;
-GO
-
--------------------------MIGRACION DE MODELO ----------------------------
+---------------------------------------- MIGRACION DE MODELO ----------------------------------------
 CREATE PROCEDURE REINUS.migrar_modelo
 AS
 BEGIN
@@ -1040,15 +732,7 @@ WHERE m.PRODUCTO_MOD_DESCRIPCION IS NOT NULL AND m.PRODUCTO_MOD_CODIGO IS NOT NU
 END ;
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_modelo;
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrar_modelo;
-GO
-
--------------------------MIGRACION DE RUBRO  ----------------------------
+---------------------------------------- MIGRACION DE RUBRO ----------------------------------------
 CREATE PROCEDURE REINUS.migrar_rubro AS
 BEGIN
 INSERT INTO REINUS.Rubro(PRODUCTO_RUBRO_DESCRIPCION)
@@ -1058,15 +742,7 @@ WHERE PRODUCTO_RUBRO_DESCRIPCION IS NOT NULL
 END
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_rubro; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrar_rubro;
-GO
-
--------------------------MIGRACION DE SUBRUBRO  ----------------------------
+---------------------------------------- MIGRACION DE SUBRUBRO ----------------------------------------
 CREATE PROCEDURE REINUS.migrar_subrubro AS
 BEGIN
 INSERT INTO REINUS.Subrubro(PRODUCTO_SUB_RUBRO, RUBRO_ID)
@@ -1077,24 +753,17 @@ WHERE PRODUCTO_SUB_RUBRO IS NOT NULL
 END
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_subrubro; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrar_subrubro
-GO
-
--------------------MIGRACION DE PRODUCTO------------------- 
+---------------------------------------- MIGRACION DE PRODUCTO ---------------------------------------- 
 CREATE PROCEDURE REINUS.migrar_producto
 AS
-BEGIN 
-    INSERT INTO REINUS.Producto(CODIGO, ID_MODELO, PRECIO, SUBRUBRO_ID, ID_MARCA)
+BEGIN
+    INSERT INTO REINUS.Producto(CODIGO, ID_MODELO, PRECIO,DESCRIPCION, SUBRUBRO_ID, ID_MARCA)
     SELECT M.PRODUCTO_CODIGO,
-           Mo.ID_MODELO, 
+           Mo.ID_MODELO,
            M.PRODUCTO_PRECIO,
+		   M.PRODUCTO_DESCRIPCION,
            S.ID_SUBRUBRO,
-           Ma.ID_MARCA 
+           Ma.ID_MARCA
     FROM gd_esquema.Maestra M
 	join REINUS.Rubro R ON M.PRODUCTO_RUBRO_DESCRIPCION = R.PRODUCTO_RUBRO_DESCRIPCION
     INNER JOIN REINUS.Subrubro S ON M.PRODUCTO_SUB_RUBRO = S.PRODUCTO_SUB_RUBRO AND S.RUBRO_ID = R.ID_RUBRO
@@ -1102,19 +771,93 @@ BEGIN
     INNER JOIN REINUS.Marca Ma ON M.PRODUCTO_MARCA = Ma.MARCA
     WHERE M.PRODUCTO_CODIGO IS NOT NULL
       AND M.PRODUCTO_PRECIO IS NOT NULL
-	GROUP BY M.PRODUCTO_CODIGO, Mo.ID_MODELO, M.PRODUCTO_PRECIO, S.ID_SUBRUBRO, Ma.ID_MARCA;
+	GROUP BY M.PRODUCTO_CODIGO, Mo.ID_MODELO, M.PRODUCTO_PRECIO, S.ID_SUBRUBRO, Ma.ID_MARCA,M.PRODUCTO_DESCRIPCION ;
 END;
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrar_producto;
-COMMIT TRANSACTION;
+---------------------------------------- MIGRACION DE PUBLICACION ----------------------------------------
+CREATE PROCEDURE REINUS.migrarPublicacion
+AS 
+BEGIN
+    INSERT INTO REINUS.Publicacion (CODIGO, FECHA, FECHA_V, DESCRIPCION, PRODUCTO_ID,
+        STOCK, PRECIO, VENDEDOR_ID, COSTO, ALMACEN_ID, PORC_VENTA)
+    SELECT DISTINCT
+        M.PUBLICACION_CODIGO,
+        M.PUBLICACION_FECHA,
+        M.PUBLICACION_FECHA_V,
+        M.PUBLICACION_DESCRIPCION,
+        P.ID_PRODUCTO AS PRODUCTO_ID,
+        M.PUBLICACION_STOCK,
+        M.PUBLICACION_PRECIO,
+		V.ID_VENDEDOR AS VENDEDOR_ID,
+        M.PUBLICACION_COSTO,
+        A.ID_ALMACEN AS ALMACEN_ID,
+        M.PUBLICACION_PORC_VENTA
+    FROM 
+        gd_esquema.Maestra M
+        
+        JOIN REINUS.Almacen A ON A.CODIGO = M.ALMACEN_CODIGO
+		JOIN REINUS.Vendedor V ON V.RAZON_SOCIAL = M.VENDEDOR_RAZON_SOCIAL AND V.CUIT = M.VENDEDOR_CUIT 
+		JOIN REINUS.Rubro R ON R.PRODUCTO_RUBRO_DESCRIPCION = M.PRODUCTO_RUBRO_DESCRIPCION
+		JOIN REINUS.Subrubro S ON S.PRODUCTO_SUB_RUBRO = M.PRODUCTO_SUB_RUBRO AND S.RUBRO_ID = R.ID_RUBRO
+		JOIN REINUS.Producto P ON P.CODIGO = M.PRODUCTO_CODIGO AND P.SUBRUBRO_ID = S.ID_SUBRUBRO
+END;
 GO
 
-DROP PROCEDURE REINUS.migrar_producto;
+---------------------------------------- MIGRAR FACTURA ----------------------------------------
+CREATE PROCEDURE REINUS.migrarFactura 
+AS
+BEGIN
+    INSERT INTO REINUS.Factura (FACTURA_NUMERO, FECHA, TOTAL, USUARIO_ID)
+	 SELECT
+        factura.numero,
+        factura.fecha,
+        factura.total,
+		usuario.ID_USUARIO
+    FROM (
+        SELECT DISTINCT
+            m.FACTURA_NUMERO as numero,
+            m.FACTURA_FECHA as fecha,
+            m.FACTURA_TOTAL as total,
+            m.PUBLICACION_CODIGO as publicacion_codigo
+        FROM gd_esquema.Maestra m
+        WHERE m.FACTURA_NUMERO IS NOT NULL
+    ) factura
+
+	JOIN REINUS.Publicacion publicacion ON publicacion.CODIGO = factura.publicacion_codigo
+    JOIN REINUS.Vendedor vendedor ON vendedor.ID_VENDEDOR = publicacion.VENDEDOR_ID
+    JOIN REINUS.Usuario usuario ON usuario.ID_USUARIO = vendedor.ID_USUARIO
+
+	ORDER BY factura.numero
+END 
 GO
 
-------------------------PARTE ENVIOS------------------------
+---------------------------------------- MIGRAR DETALLE DE FACTURA ----------------------------------------
+CREATE PROCEDURE REINUS.migrarDetalleFactura
+AS 
+BEGIN
+    INSERT INTO REINUS.Detalle_Factura (FACTURA_ID, CONCEPTO_ID, PRECIO, CANTIDAD, SUBTOTAL, PUBLICACION_ID)
+    SELECT DISTINCT
+	    F.FACTURA_ID,
+        C.CONCEPTO_ID,
+        M.FACTURA_DET_PRECIO,
+        M.FACTURA_DET_CANTIDAD,
+        M.FACTURA_DET_SUBTOTAL,
+		P.ID_PUBLICACION
+    FROM 
+        gd_esquema.Maestra M
+    JOIN REINUS.Factura F ON F.FACTURA_NUMERO = M.FACTURA_NUMERO
+    
+	JOIN REINUS.Concepto C ON C.FACTURA_DET_TIPO = M.FACTURA_DET_TIPO
+	
+	JOIN REINUS.Publicacion P ON P.CODIGO = M.PUBLICACION_CODIGO
+
+    WHERE 
+        M.FACTURA_DET_CANTIDAD IS NOT NULL
+END 
+GO
+
+---------------------------------------- MIGRACIÓN TIPO ENVIOS ----------------------------------------
 CREATE PROCEDURE REINUS.migrarTipoEnvio
 AS 
 BEGIN
@@ -1125,33 +868,17 @@ WHERE ENVIO_TIPO IS NOT NULL
 GROUP BY ENVIO_TIPO
 END 
 GO
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarTipoEnvio; 
-COMMIT TRANSACTION;
-GO
 
-DROP PROCEDURE REINUS.migrarTipoEnvio;
-GO
-
-
--- Migracon de envio
+---------------------------------------- MIGRACIÓN ENVIOS ----------------------------------------
 CREATE PROCEDURE REINUS.migrarEnvio
 AS
 BEGIN
-INSERT INTO REINUS.Envio (
-        FECHA_PROGRAMADA, 
-        DOMICILIO_ID, 
-        HORA_INICIO, 
-        HORA_FIN_INICIO, 
-        COSTO, 
-        FECHA_ENTREGA, 
-        TIPO_ENVIO_ID
-    )
+INSERT INTO REINUS.Envio (FECHA_PROGRAMADA, DOMICILIO_ID, HORA_INICIO, HORA_FIN_INICIO, COSTO, FECHA_ENTREGA, TIPO_ENVIO_ID )
 
 SELECT DISTINCT M.ENVIO_FECHA_PROGAMADA,
 	   D.ID_DOMICILIO,
-       M.ENVIO_HORA_FIN_INICIO,
        M.ENVIO_HORA_INICIO,
+	   M.ENVIO_HORA_FIN_INICIO,
 	   M.ENVIO_COSTO,
 	   M.ENVIO_FECHA_ENTREGA,
 	   T.TIPO_ENVIO_ID
@@ -1159,16 +886,13 @@ SELECT DISTINCT M.ENVIO_FECHA_PROGAMADA,
 FROM gd_esquema.Maestra M
 	JOIN REINUS.Tipo_Envio T ON M.ENVIO_TIPO = T.TIPO
 
-	JOIN 
-        REINUS.Domicilio D ON M.CLI_USUARIO_DOMICILIO_CP = D.CP
+	JOIN REINUS.Domicilio D ON M.CLI_USUARIO_DOMICILIO_CP = D.CP
         AND M.CLI_USUARIO_DOMICILIO_PISO = D.PISO
         AND M.CLI_USUARIO_DOMICILIO_DEPTO = D.DEPTO
+		AND M.CLI_USUARIO_DOMICILIO_CALLE = D.CALLE
+        AND M.CLI_USUARIO_DOMICILIO_NRO_CALLE = D.NUM_CALLE
     JOIN 
-        REINUS.Direccion DIR ON D.DIRECCION_ID = DIR.ID_DIRECCION
-        AND M.CLI_USUARIO_DOMICILIO_CALLE = DIR.CALLE
-        AND M.CLI_USUARIO_DOMICILIO_NRO_CALLE = DIR.NUM_CALLE
-    JOIN 
-        REINUS.Localidad LOC ON DIR.LOCALIDAD_ID = LOC.ID_LOCALIDAD
+        REINUS.Localidad LOC ON D.LOCALIDAD_ID = LOC.ID_LOCALIDAD
         AND M.CLI_USUARIO_DOMICILIO_LOCALIDAD = LOC.NOMBRE
     JOIN 
         REINUS.Provincia P ON LOC.ID_PROVINCIA = P.ID_PROVINCIA
@@ -1177,117 +901,12 @@ FROM gd_esquema.Maestra M
         M.ENVIO_COSTO IS NOT NULL;
 END;
 GO
- 
- CREATE PROCEDURE REINUS.migrarEnvio2
-AS
-BEGIN
-   /* INSERT INTO REINUS.Envio (
-        FECHA_PROGRAMADA, 
-        DOMICILIO_ID, 
-        HORA_INICIO, 
-        HORA_FIN_INICIO, 
-        COSTO, 
-        FECHA_ENTREGA, 
-        TIPO_ENVIO_ID
-    )*/
-    SELECT 
-        M.ENVIO_FECHA_PROGAMADA,
-        D.ID_DOMICILIO,
-        M.ENVIO_HORA_FIN_INICIO,
-        M.ENVIO_HORA_INICIO,
-        M.ENVIO_COSTO,
-        M.ENVIO_FECHA_ENTREGA,
-        T.TIPO_ENVIO_ID
-    FROM gd_esquema.Maestra M
-    JOIN REINUS.Tipo_Envio T ON M.ENVIO_TIPO = T.TIPO
-    JOIN REINUS.Domicilio D ON M.CLI_USUARIO_DOMICILIO_CP = D.CP
-        AND M.CLI_USUARIO_DOMICILIO_PISO = D.PISO
-        AND M.CLI_USUARIO_DOMICILIO_DEPTO = D.DEPTO
-    JOIN REINUS.Direccion DIR ON D.DIRECCION_ID = DIR.ID_DIRECCION
-        AND M.CLI_USUARIO_DOMICILIO_CALLE = DIR.CALLE
-        AND M.CLI_USUARIO_DOMICILIO_NRO_CALLE = DIR.NUM_CALLE
-    JOIN REINUS.Localidad LOC ON DIR.LOCALIDAD_ID = LOC.ID_LOCALIDAD
-        AND M.CLI_USUARIO_DOMICILIO_LOCALIDAD = LOC.NOMBRE
-    JOIN REINUS.Provincia P ON LOC.ID_PROVINCIA = P.ID_PROVINCIA
-        AND M.CLI_USUARIO_DOMICILIO_PROVINCIA = P.NOMBRE
-    WHERE M.ENVIO_COSTO IS NOT NULL
-    GROUP BY 
-        M.ENVIO_FECHA_PROGAMADA,
-        D.ID_DOMICILIO,
-        M.ENVIO_HORA_FIN_INICIO,
-        M.ENVIO_HORA_INICIO,
-        M.ENVIO_COSTO,
-        M.ENVIO_FECHA_ENTREGA,
-        T.TIPO_ENVIO_ID;  -- Agrupar por los campos para evitar duplicados
-END;
-GO
 
-
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarEnvio2; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrarEnvio;
-GO
-
----------------------------------------MIGRAR DETALLE PAGO-----------------------------------------
-CREATE PROCEDURE REINUS.Migrar_Detalle_Pago
-AS
-BEGIN
-    INSERT INTO REINUS.Detalle_Pago (NRO_TARJETA, FECHA_VENC_TARJETA, CANT_CUOTAS)
-    SELECT DISTINCT 
-		M.PAGO_NRO_TARJETA as NRO_TARJETA,
-        M. PAGO_FECHA_VENC_TARJETA as FECHA_VENC_TARJETA,
-		M.PAGO_CANT_CUOTAS as CANT_CUOTAS
-    FROM gd_esquema.Maestra M
-    WHERE m.PAGO_NRO_TARJETA  IS NOT NULL
-END
-GO
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.Migrar_Detalle_Pago; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.Migrar_Detalle_Pago;
-GO
-
-
----------------------------------------MIGRAR MEDIO PAGO-----------------------------------------
-CREATE PROCEDURE REINUS.Migrar_MedioPago
-AS
-BEGIN
-    INSERT INTO REINUS.MedioPago(MEDIO_PAGO, TIPO_MEDIO_PAGO)
-	SELECT DISTINCT 
-	M.PAGO_MEDIO_PAGO AS MEDIO_PAGO,
-	M.PAGO_TIPO_MEDIO_PAGO AS TIPO_MEDIO_PAGO
-	FROM gd_esquema.Maestra M
-
-WHERE PAGO_MEDIO_PAGO IS NOT NULL AND PAGO_TIPO_MEDIO_PAGO IS NOT NULL
-
-END
-GO
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.Migrar_MedioPago; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.Migrar_MedioPago;
-GO
----------------------------------------MIGRAR VENTA-----------------------------------------
+---------------------------------------- MIGRAR VENTA ----------------------------------------
 CREATE PROCEDURE REINUS.migrarVenta
 AS
 BEGIN
-/*INSERT INTO REINUS.Venta(
-CODIGO ,
-FECHA_HORA ,
-TOTAL ,
-CLIENTE_ID ,
-ENVIO_ID 
-)*/
+INSERT INTO REINUS.Venta(CODIGO, FECHA_HORA, TOTAL, CLIENTE_ID, ENVIO_ID )
 SELECT DISTINCT M.VENTA_CODIGO,
 M.VENTA_FECHA,
 M.VENTA_TOTAL,
@@ -1305,258 +924,196 @@ LEFT JOIN REINUS.Envio E ON
     AND E.HORA_INICIO = M.ENVIO_HORA_INICIO
     AND E.HORA_FIN_INICIO = M.ENVIO_HORA_FIN_INICIO
     AND E.FECHA_ENTREGA = M.ENVIO_FECHA_ENTREGA
-	AND EXISTS (
-        SELECT 1
-        FROM REINUS.Domicilio D
-        JOIN REINUS.Direccion DIR ON D.DIRECCION_ID = DIR.ID_DIRECCION
-        JOIN REINUS.Localidad LOC ON DIR.LOCALIDAD_ID = LOC.ID_LOCALIDAD
-        JOIN REINUS.Provincia P ON LOC.ID_PROVINCIA = P.ID_PROVINCIA
-        WHERE D.ID_DOMICILIO = E.DOMICILIO_ID
-          AND M.CLI_USUARIO_DOMICILIO_CP = D.CP
-          AND M.CLI_USUARIO_DOMICILIO_PISO = D.PISO
-          AND M.CLI_USUARIO_DOMICILIO_DEPTO = D.DEPTO
-          AND DIR.CALLE = M.CLI_USUARIO_DOMICILIO_CALLE
-          AND DIR.NUM_CALLE = M.CLI_USUARIO_DOMICILIO_NRO_CALLE
-          AND LOC.NOMBRE = M.CLI_USUARIO_DOMICILIO_LOCALIDAD
-          AND P.NOMBRE = M.CLI_USUARIO_DOMICILIO_PROVINCIA
-    )
 
 WHERE M.VENTA_CODIGO IS NOT NULL AND M.ENVIO_COSTO IS NOT NULL;
 END
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarVenta; 
-COMMIT TRANSACTION;
 GO
 
-DROP PROCEDURE REINUS.migrarVenta;
-GO
+---------------------------------------- MIGRAR DETALLE VENTA ----------------------------------------
+CREATE PROCEDURE REINUS.MigrarDetalleVenta
+AS
+BEGIN
+INSERT INTO REINUS.Detalle_Venta(CANT, PRECIO, SUBTOTAL, VENTA_ID, PUBLICACION_ID)
+SELECT DISTINCT M.VENTA_DET_CANT,
+M.VENTA_DET_PRECIO,
+M.VENTA_DET_SUB_TOTAL,
+V.ID_VENTA,
+P.ID_PUBLICACION
 
-SELECT 
-    M.VENTA_CODIGO,
-    M.VENTA_FECHA,
-    M.VENTA_TOTAL,
-    C.ID_CLIENTE,
-    T.TIPO_ENVIO_ID,
-    M.ENVIO_COSTO,
-    M.ENVIO_FECHA_PROGAMADA,
-    M.ENVIO_HORA_INICIO,
-    M.ENVIO_HORA_FIN_INICIO,
-    M.ENVIO_FECHA_ENTREGA,
-    E.ENVIO_ID,
-    D.ID_DOMICILIO,
-    DIR.CALLE,
-    DIR.NUM_CALLE,
-    LOC.NOMBRE AS LOCALIDAD_NOMBRE,
-    P.NOMBRE AS PROVINCIA_NOMBRE
 FROM gd_esquema.Maestra M
-LEFT JOIN REINUS.Cliente C ON 
-    M.CLIENTE_NOMBRE = C.NOMBRE 
-    AND M.CLIENTE_APELLIDO = C.APELLIDO 
-    AND M.CLIENTE_DNI = C.DNI
-LEFT JOIN REINUS.Tipo_Envio T ON M.ENVIO_TIPO = T.TIPO
-LEFT JOIN REINUS.Envio E ON 
-    E.TIPO_ENVIO_ID = T.TIPO_ENVIO_ID 
-    AND M.ENVIO_COSTO = E.COSTO 
-    AND E.FECHA_PROGRAMADA = M.ENVIO_FECHA_PROGAMADA
-    AND E.HORA_INICIO = M.ENVIO_HORA_INICIO
-    AND E.HORA_FIN_INICIO = M.ENVIO_HORA_FIN_INICIO
-    AND E.FECHA_ENTREGA = M.ENVIO_FECHA_ENTREGA
-LEFT JOIN REINUS.Domicilio D ON 
-    M.CLI_USUARIO_DOMICILIO_CP = D.CP 
-    AND M.CLI_USUARIO_DOMICILIO_PISO = D.PISO 
-    AND M.CLI_USUARIO_DOMICILIO_DEPTO = D.DEPTO
-LEFT JOIN REINUS.Direccion DIR ON D.DIRECCION_ID = DIR.ID_DIRECCION
-LEFT JOIN REINUS.Localidad LOC ON DIR.LOCALIDAD_ID = LOC.ID_LOCALIDAD
-LEFT JOIN REINUS.Provincia P ON LOC.ID_PROVINCIA = P.ID_PROVINCIA
-WHERE M.VENTA_CODIGO IS NOT NULL 
-    AND M.ENVIO_COSTO IS NOT NULL
-    AND E.ENVIO_ID IS NULL;  -- Solo selecciona filas donde ENVIO_ID es NULL
+JOIN REINUS.Venta V ON V.CODIGO = M.VENTA_CODIGO
+JOIN REINUS.Publicacion P ON P.CODIGO = M.PUBLICACION_CODIGO
 
-
-
-
-SELECT 
-    E.TIPO_ENVIO_ID,
-    E.COSTO,
-    E.FECHA_PROGRAMADA,
-    E.HORA_INICIO,
-    E.HORA_FIN_INICIO,
-    E.FECHA_ENTREGA,
-    E.ENVIO_ID
-FROM REINUS.Envio E
-WHERE 
-    E.COSTO IS NOT NULL -- Aquí puedes agregar condiciones para filtrar los envíos relevantes
-END;
-GO
-
--------------------------------------------MIGRAR FACTURA -----------------
---FALTA PUBLICACION PARA PROBAR
-CREATE PROCEDURE REINUS.migrarFactura 
-AS
-BEGIN
-    INSERT INTO REINUS.Factura (FACTURA_NUMERO, FECHA, TOTAL, USUARIO_ID)
-	 SELECT
-        factura.numero,
-        factura.fecha,
-        usuario.ID_USUARIO,
-        factura.total
-    FROM (
-        SELECT DISTINCT
-            m.FACTURA_NUMERO as numero,
-            m.FACTURA_FECHA as fecha,
-            m.FACTURA_TOTAL as total,
-            m.PUBLICACION_CODIGO as publicacion_codigo
-        FROM gd_esquema.Maestra m
-        WHERE m.FACTURA_NUMERO IS NOT NULL
-    ) factura
-
-	JOIN REINUS.Publicacion publicacion ON publicacion.ID_PUBLICACION = factura.publicacion_codigo
-    JOIN REINUS.Vendedor vendedor ON vendedor.ID_VENDEDOR = publicacion.VENDEDOR_ID
-    JOIN REINUS.Usuario usuario ON usuario.ID_USUARIO = vendedor.ID_USUARIO
-
-	ORDER BY factura.numero
-END 
-GO
-
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarFactura; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrarFactura;
-GO
-
-----------------------------------MIGRAR DETALLE DE FACTURA ---------------------------------
-
-
-
----MIGRACION DE DETALLE FACTURA Y CONCEPTOES COMO UNA MUCHOS A MUCHIS
-CREATE PROCEDURE REINUS.migrarDetalleFactura
-AS 
-BEGIN
-    INSERT INTO REINUS.Detalle_Factura (FACTURA_ID, CONCEPTO_ID, PRECIO, CANTIDAD, SUBTOTAL)
-    SELECT 
-	   F.FACTURA_ID,
-        C.CONCEPTO_ID,     -- Este debe ser el ID único del concepto
-        M.FACTURA_DET_PRECIO,
-        M.FACTURA_DET_CANTIDAD,
-        M.FACTURA_DET_SUBTOTAL
-    FROM 
-        gd_esquema.Maestra M
-    JOIN 
-        REINUS.Factura F ON M.FACTURA_NUMERO = F.FACTURA_NUMERO
-  JOIN 
-        REINUS.Concepto C ON M.FACTURA_DET_TIPO = C.FACTURA_DET_TIPO
-    WHERE 
-        M.FACTURA_DET_CANTIDAD IS NOT NULL
-        AND M.FACTURA_DET_PRECIO  >0
-        AND M.FACTURA_DET_SUBTOTAL >0
-END 
-GO
- 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarDetalleFactura; 
-COMMIT TRANSACTION;
-GO
-
-DROP PROCEDURE REINUS.migrarDetalleFactura;
-GO
----------------------------------MIGRACION DE PUBLICACION -----------------------
-
-CREATE PROCEDURE REINUS.migrarPublicacion
-AS 
-BEGIN
-    INSERT INTO REINUS.Publicacion (
-        CODIGO,
-        FECHA,
-        FECHA_V,
-        DESCRIPCION,
-        PRODUCTO_ID,
-        STOCK,
-        PRECIO,
-        VENDEDOR_ID,
-        COSTO,
-        ALMACEN,
-        PORC_VENTA,
-        DETALLE_FACTURA_ID
-    )
-    SELECT 
-        M.PUBLICACION_CODIGO,
-        M.PUBLICACION_FECHA,
-        M.PUBLICACION_FECHA_V,
-        M.PUBLICACION_DESCRIPCION,
-        P.ID_PRODUCTO AS PRODUCTO_ID,
-        M.PUBLICACION_STOCK,
-        M.PUBLICACION_PRECIO,
-        -- Sucede que jsuto si matcheamos con el vendedor puede haber duplciados entonces este agarra el primero
-        (SELECT TOP 1 ID_VENDEDOR FROM REINUS.Vendedor V WHERE V.CUIT = M.VENDEDOR_CUIT) AS VENDEDOR_ID,
-        M.PUBLICACION_COSTO,
-        A.ID_ALMACEN AS ALMACEN,
-        M.PUBLICACION_PORC_VENTA,
-          -- Subconsulta para obtener FACTURA_ID en base a FACTURA_NUMERO en Maestra
-		  -- Necesutamos juntarlo con algo, y y por eso tenemos el detalle factura y la factura
-		  --- y el detalle tiene factura_id, para asi joinearlo con la tabla factura y conseguir factura_nunero
-		  -- Factura numero es la relacion que hay la tabla maestra y en la nuestra
-        (SELECT D.FACTURA_ID 
-         FROM REINUS.Detalle_Factura D
-         JOIN REINUS.Factura F ON F.FACTURA_ID = D.FACTURA_ID
-         WHERE F.FACTURA_NUMERO = M.FACTURA_NUMERO) AS DETALLE_FACTURA_ID
-    FROM 
-        gd_esquema.Maestra M
-        LEFT JOIN REINUS.Producto P ON P.CODIGO = M.PRODUCTO_CODIGO --este creo que esta bien
-        LEFT JOIN REINUS.Almacen A ON A.CODIGO = M.ALMACEN_CODIGO
-        
-END;
-GO
-
-BEGIN TRANSACTION; 
-CREATE PROCEDURE REINUS.migrarVenta
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    INSERT INTO REINUS.Venta (
-        CODIGO,
-        FECHA_HORA,
-        TOTAL,
-        CLIENTE_ID,
-        ENVIO_ID
-    )
-    SELECT DISTINCT 
-        M.VENTA_CODIGO,
-        M.VENTA_FECHA,
-        M.VENTA_TOTAL,
-        C.ID_CLIENTE,
-        E.ENVIO_ID
-    FROM gd_esquema.Maestra M
-    JOIN REINUS.Cliente C ON 
-        M.CLIENTE_NOMBRE = C.NOMBRE 
-        AND M.CLIENTE_APELLIDO = C.APELLIDO 
-        AND M.CLIENTE_DNI = C.DNI
-    JOIN REINUS.Tipo_Envio T ON M.ENVIO_TIPO = T.TIPO
-    JOIN REINUS.Envio E ON 
-        M.ENVIO_COSTO = E.COSTO 
-        AND E.TIPO_ENVIO_ID = T.TIPO_ENVIO_ID
-    JOIN REINUS.Domicilio D ON 
-        M.CLI_USUARIO_DOMICILIO_CP = D.CP
-        AND M.CLI_USUARIO_DOMICILIO_PISO = D.PISO
-        AND M.CLI_USUARIO_DOMICILIO_DEPTO = D.DEPTO
-    JOIN REINUS.Direccion DIR ON 
-        D.DIRECCION_ID = DIR.ID_DIRECCION
-        AND M.CLI_USUARIO_DOMICILIO_CALLE = DIR.CALLE
-        AND M.CLI_USUARIO_DOMICILIO_NRO_CALLE = DIR.NUM_CALLE
-    JOIN REINUS.Localidad LOC ON 
-        DIR.LOCALIDAD_ID = LOC.ID_LOCALIDAD
-        AND M.CLI_USUARIO_DOMICILIO_LOCALIDAD = LOC.NOMBRE
-    JOIN REINUS.Provincia P ON 
-        LOC.ID_PROVINCIA = P.ID_PROVINCIA
-        AND M.CLI_USUARIO_DOMICILIO_PROVINCIA = P.NOMBRE
-    WHERE M.VENTA_CODIGO IS NOT NULL; 
+WHERE M.VENTA_DET_CANT IS NOT NULL AND M.VENTA_DET_PRECIO IS NOT NULL AND M.VENTA_DET_SUB_TOTAL IS NOT NULL;
 END
 GO
 
-BEGIN TRANSACTION; 
-EXECUTE REINUS.migrarVenta; 
-COMMIT TRANSACTION;
+---------------------------------------- MIGRAR DETALLE PAGO ----------------------------------------
+CREATE PROCEDURE REINUS.Migrar_Detalle_Pago
+AS
+BEGIN
+    INSERT INTO REINUS.Detalle_Pago (NRO_TARJETA, FECHA_VENC_TARJETA, CANT_CUOTAS)
+    SELECT DISTINCT 
+		M.PAGO_NRO_TARJETA as NRO_TARJETA,
+        M. PAGO_FECHA_VENC_TARJETA as FECHA_VENC_TARJETA,
+		M.PAGO_CANT_CUOTAS as CANT_CUOTAS
+    FROM gd_esquema.Maestra M
+    WHERE m.PAGO_NRO_TARJETA  IS NOT NULL
+END
 GO
+
+---------------------------------------- MIGRAR MEDIO PAGO ----------------------------------------
+CREATE PROCEDURE REINUS.Migrar_MedioPago
+AS
+BEGIN
+    INSERT INTO REINUS.MedioPago(MEDIO_PAGO, TIPO_MEDIO_PAGO)
+	SELECT DISTINCT 
+	M.PAGO_MEDIO_PAGO AS MEDIO_PAGO,
+	M.PAGO_TIPO_MEDIO_PAGO AS TIPO_MEDIO_PAGO
+	FROM gd_esquema.Maestra M
+
+WHERE PAGO_MEDIO_PAGO IS NOT NULL AND PAGO_TIPO_MEDIO_PAGO IS NOT NULL
+
+END
+GO
+
+---------------------------------------- MIGRAR PAGO ----------------------------------------
+CREATE PROCEDURE REINUS.MigrarPago
+AS
+BEGIN
+    INSERT INTO REINUS.Pago(IMPORTE, FECHA, VENTA_ID, DETALLE_PAGO_ID, MEDIO_PAGO_ID)
+    SELECT DISTINCT 
+		M.PAGO_IMPORTE,
+        M.PAGO_FECHA,
+		V.ID_VENTA,
+		D.ID_DETALLE_PAGO,
+		P.ID_MEDIO_PAGO
+    FROM gd_esquema.Maestra M
+
+	JOIN REINUS.Venta V ON V.CODIGO = M.VENTA_CODIGO
+	JOIN REINUS.Detalle_Pago D ON D.NRO_TARJETA = M.PAGO_NRO_TARJETA
+	JOIN REINUS.MedioPago P ON P.MEDIO_PAGO = M.PAGO_MEDIO_PAGO
+
+    WHERE M.PAGO_IMPORTE IS NOT NULL
+END
+GO
+
+---------------------------------------- Ejecucion procedures ----------------------------------------
+EXEC REINUS.migrar_provincia
+EXEC REINUS.migrar_Localidad
+EXEC REINUS.migrar_usuarios
+EXEC REINUS.migrarCliente
+EXEC REINUS.Migrar_Vendedor
+EXEC REINUS.Migrar_Domicilio
+EXEC REINUS.migrar_almacen
+EXEC REINUS.migrar_rubro
+EXEC REINUS.migrar_subrubro
+EXEC REINUS.migrar_marca
+EXEC REINUS.migrar_modelo
+EXEC REINUS.migrar_producto
+EXEC REINUS.migrarPublicacion
+EXEC REINUS.migrarTipoEnvio
+EXEC REINUS.migrarEnvio
+EXEC REINUS.migrarVenta
+EXEC REINUS.migrarDetalleVenta
+EXEC REINUS.Migrar_Detalle_Pago
+EXEC REINUS.Migrar_MedioPago
+EXEC REINUS.MigrarPago
+EXEC REINUS.migrarFactura
+EXEC REINUS.migrarConcepto
+EXEC REINUS.migrarDetalleFactura
+EXEC REINUS.migrar_producto
+
+---------------------------------------- ELiminacion procedures ----------------------------------------
+IF OBJECT_ID('REINUS.migrar_provincia','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_provincia
+GO
+
+IF OBJECT_ID('REINUS.migrar_Localidad','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_Localidad
+GO
+
+IF OBJECT_ID('REINUS.Migrar_Domicilio','P') IS NOT NULL
+DROP PROCEDURE REINUS.Migrar_Domicilio
+GO
+
+IF OBJECT_ID('REINUS.migrarCliente','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarCliente
+GO
+
+IF OBJECT_ID('REINUS.Migrar_Vendedor','P') IS NOT NULL
+DROP PROCEDURE REINUS.Migrar_Vendedor
+GO
+
+IF OBJECT_ID('REINUS.migrar_usuarios','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_usuarios
+GO
+
+IF OBJECT_ID('REINUS.migrar_almacen','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_almacen
+GO
+
+IF OBJECT_ID('REINUS.migrarConcepto','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarConcepto
+GO
+
+IF OBJECT_ID('REINUS.migrar_marca','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_marca
+GO
+
+IF OBJECT_ID('REINUS.migrar_modelo','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_modelo
+GO
+
+IF OBJECT_ID('REINUS.migrar_rubro','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_rubro
+GO
+
+IF OBJECT_ID('REINUS.migrar_subrubro','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_subrubro
+GO
+
+IF OBJECT_ID('REINUS.migrar_producto','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrar_producto
+GO
+
+IF OBJECT_ID('REINUS.migrarPublicacion','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarPublicacion
+GO
+
+IF OBJECT_ID('REINUS.migrarFactura','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarFactura
+GO
+
+IF OBJECT_ID('REINUS.migrarDetalleFactura','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarDetalleFactura
+GO
+
+IF OBJECT_ID('REINUS.migrarTipoEnvio','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarTipoEnvio
+GO
+
+IF OBJECT_ID('REINUS.migrarEnvio','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarEnvio
+GO
+
+IF OBJECT_ID('REINUS.migrarVenta','P') IS NOT NULL
+DROP PROCEDURE REINUS.migrarVenta
+GO
+
+IF OBJECT_ID('REINUS.MigrarDetalleVenta','P') IS NOT NULL
+DROP PROCEDURE REINUS.MigrarDetalleVenta
+GO
+
+IF OBJECT_ID('REINUS.Migrar_Detalle_Pago','P') IS NOT NULL
+DROP PROCEDURE REINUS.Migrar_Detalle_Pago
+GO
+
+IF OBJECT_ID('REINUS.Migrar_MedioPago','P') IS NOT NULL
+DROP PROCEDURE REINUS.Migrar_MedioPago
+GO
+
+IF OBJECT_ID('REINUS.MigrarPago','P') IS NOT NULL
+DROP PROCEDURE REINUS.MigrarPago
+GO
+------------------------------------------------------------------------------------------------------------------------
