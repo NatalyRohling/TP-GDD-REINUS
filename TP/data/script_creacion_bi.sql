@@ -157,6 +157,31 @@ GO
 
 
 
+CREATE TABLE REINUS.BI_D_RUBRO(
+   ID_RUBRO INTEGER IDENTITY(1,1) NOT NULL,
+PRODUCTO_RUBRO_DESCRIPCION  NVARCHAR(50)
+)
+
+CREATE TABLE REINUS.BI_D_SUBRUBRO(
+   ID_SUBRUBRO INTEGER IDENTITY(1,1) NOT NULL,
+PRODUCTO_SUB_RUBRO NVARCHAR(50)
+)
+CREATE TABLE REINUS.BI_D_TIPO_ENVIO
+(
+TIPO_ENVIO_ID INTEGER IDENTITY(1,1) NOT NULL,
+TIPO NVARCHAR(50)
+)
+GO
+CREATE TABLE REINUS.BI_D_MEDIO_PAGO(
+ID_MEDIO_PAGO INTEGER IDENTITY(1,1) NOT NULL, 
+MEDIO_PAGO NVARCHAR(50),
+TIPO_MEDIO_PAGO NVARCHAR(50)
+
+)
+GO
+
+
+
 	CREATE FUNCTION REINUS.CALCULAR_RANGO_ETARIO (@FECHA_NACIMIENTO DATE)
 RETURNS SMALLINT
 AS
@@ -253,18 +278,22 @@ BEGIN
 END
 GO
 
-/*
-CREATE TABLE REINUS.Subrubro (
-ID_SUBRUBRO INTEGER IDENTITY(1,1) NOT NULL,
-RUBRO_ID INTEGER NOT NULL ,--FK
-PRODUCTO_SUB_RUBRO NVARCHAR(50)
-)
-
-CREATE TABLE REINUS.Rubro (--CRAEDA CON EXITO
-ID_RUBRO INTEGER IDENTITY(1,1) NOT NULL,
-PRODUCTO_RUBRO_DESCRIPCION  NVARCHAR(50)
-)*/
-
+-- Migracion de TIPO ENVIO
+CREATE PROCEDURE REINUS.BI_MIGRAR_D_TIPO_ENVIO
+AS
+BEGIN
+    INSERT INTO BI_D_TIPO_ENVIO(TIPO)
+        (select TIPO  from REINUS.Tipo_Envio)
+END
+GO
+-- Migracion de MEDIO PAGO
+CREATE PROCEDURE REINUS.BI_MIGRAR_D_MEDIO_PAGO
+AS
+BEGIN
+    INSERT INTO BI_D_MEDIO_PAGO(MEDIO_PAGO, TIPO_MEDIO_PAGO)
+        (select MEDIO_PAGO, TIPO_MEDIO_PAGO from REINUS.MedioPago)
+END
+GO
 -- Migración RUBRO
 CREATE PROCEDURE REINUS.BI_MIGRAR_RUBRO
 AS
@@ -278,8 +307,111 @@ GO
 CREATE PROCEDURE REINUS.BI_MIGRAR_SUBRUBRO
 AS
 BEGIN
-INSERT INTO BI_D_SUBRUBRO(RUBRO_ID,PRODUCTO_SUB_RUBRO)
-(SELECT  RUBRO_ID, PRODUCTO_SUB_RUBRO FROM REINUS.Subrubro
-GROUP BY  RUBRO_ID, PRODUCTO_SUB_RUBRO)
+INSERT INTO BI_D_SUBRUBRO(PRODUCTO_SUB_RUBRO)
+(SELECT  PRODUCTO_SUB_RUBRO FROM REINUS.Subrubro
+GROUP BY  PRODUCTO_SUB_RUBRO)
 END
+GO
+
+
+
+/* ESTO PODRIAMOS USALRO*/
+
+/*
+CREATE PROCEDURE REINUS.BI_MIGRAR_D_UBICACION
+AS
+BEGIN
+    INSERT INTO BI_D_UBICACION(UBI_PROVINCIA, UBI_LOCALIDAD)
+        (SELECT prov_nombre, localidad_nombre
+         FROM REINUS.Localidad
+                  JOIN REINUS.Provincia P ON P.prov_cod = Localidad.localidad_prov)
+END
+GO
+
+
+CREATE PROCEDURE REINUS.BI_MIGRAR_D_TIEMPO
+AS
+BEGIN
+    -
+    INSERT INTO BI_D_TIEMPO(TIEMPO_ANIO, TIEMPO_CUATRIMESTRE, TIEMPO_MES)
+        (SELECT YEAR(ticket_fecha), DATEPART(QUARTER, ticket_fecha), MONTH(ticket_fecha)
+         FROM REINUS.Ticket
+         GROUP BY YEAR(ticket_fecha), DATEPART(QUARTER, ticket_fecha), MONTH(ticket_fecha)
+         UNION
+         SELECT YEAR(pago_fecha), DATEPART(QUARTER, pago_fecha), MONTH(pago_fecha)
+         FROM REINUS.Pago
+         GROUP BY YEAR(pago_fecha), DATEPART(QUARTER, pago_fecha), MONTH(pago_fecha)
+         UNION
+         SELECT YEAR(prog_env_fecha_programacion),
+                DATEPART(QUARTER, prog_env_fecha_programacion),
+                MONTH(prog_env_fecha_programacion)
+         FROM REINUS.Programacion_Envio
+         GROUP BY YEAR(prog_env_fecha_programacion), DATEPART(QUARTER, prog_env_fecha_programacion),
+                  MONTH(prog_env_fecha_programacion))
+END
+GO
+
+
+
+
+*/
+
+---------------------------------------- Creacion de vistas ----------------------------------------
+--
+/*Volumen de ventas. Cantidad de ventas registradas por rango horario según el
+ mes de cada año.*/
+ --4--
+CREATE VIEW REINUS.VIEW_4 AS
+SELECT UBI_PROVINCIA,
+       UBI_LOCALIDAD,
+       TIEMPO_ANIO,
+       TIEMPO_MES,
+       SUM(VENT_CANTIDAD_VENTAS) AS CANTIDAD_VENTAS
+FROM REINUS.BI_H_VENTAS
+         JOIN REINUS.BI_D_UBICACION ON UBI_ID = BI_H_VENTAS.VENT_UBICACION
+         JOIN REINUS.BI_D_TIEMPO ON TIEMPO_ID = BI_H_VENTAS.VENT_TIEMPO
+         JOIN REINUS.BI_D_TURNOS ON BI_H_VENTAS.VENT_TURNOS = BI_D_TURNOS.TURNO_ID
+GROUP BY UBI_PROVINCIA, UBI_LOCALIDAD, TIEMPO_ANIO, TIEMPO_MES
+GO
+
+
+
+--7--
+--
+/*Porcentaje de cumplimiento de envíos en los tiempos programados por
+ provincia (del almacén) por año/mes (desvío). Se calcula teniendo en cuenta los
+ envíos cumplidos sobre el total de envíos para el período.
+/*Hay que cambiar de sucrusal a rango etario */
+CREATE VIEW REINUS.VIEW_7 AS
+SELECT 
+    S1.SUCURSAL_DETALLE,
+    T1.TIEMPO_ANIO, 
+    T1.TIEMPO_MES,
+    (
+        (
+            SELECT COUNT(*) 
+            FROM REINUS.BI_D_TIEMPO T2 
+            JOIN REINUS.BI_H_ENVIOS E2 
+                ON E2.ENV_TIEMPO = T2.TIEMPO_ID 
+            WHERE 
+                T2.TIEMPO_ANIO = T1.TIEMPO_ANIO 
+                AND T2.TIEMPO_MES = T1.TIEMPO_MES 
+                AND S1.SUCURSAL_ID = E2.ENV_SUCURSAL 
+                AND E2.ENV_ATRASADO = 0
+            GROUP BY E2.ENV_SUCURSAL 
+        ) * 100.0 / COUNT(E1.ENV_ID)
+    ) AS 'Porcentaje cumplimiento'
+FROM 
+    REINUS.BI_H_ENVIOS E1
+JOIN 
+    REINUS.BI_D_SUCURSAL S1 
+    ON E1.ENV_SUCURSAL = S1.SUCURSAL_ID
+JOIN 
+    REINUS.BI_D_TIEMPO T1 
+    ON E1.ENV_TIEMPO = T1.TIEMPO_ID
+GROUP BY 
+    T1.TIEMPO_ANIO, 
+    T1.TIEMPO_MES, 
+    S1.SUCURSAL_DETALLE, 
+    S1.SUCURSAL_ID
 GO
